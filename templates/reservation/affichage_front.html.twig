@@ -1,0 +1,39 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}<br><br>
+   <h1>Reservation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateRes</th>
+                <th>Heure</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.DateRes ? reservation.DateRes|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.heure ? reservation.heure|date('H:i:s') : '' }}</td>
+                <td>{{reservation.Etat==-1?'En attente':reservation.Etat==0? 'Réfuser':'Confirmer'  }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
+                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+                    <a href="{{ path('app_reservation_delete', {'id': reservation.id}) }}">delete</a>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+              {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

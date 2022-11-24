@@ -1,0 +1,37 @@
+{% extends 'base_back.html.twig' %}
+
+{% block body %}
+    <h1>Reservation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateRes</th>
+                <th>Heure</th>
+                <th>Etat</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.DateRes ? reservation.DateRes|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.heure ? reservation.heure|date('H:i:s') : '' }}</td>
+                <td>{{ reservation.Etat }}</td>
+                <td>
+                  
+                   
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
